@@ -1,0 +1,8 @@
+#!ipxe
+
+dhcp
+set initiator-iqn iqn.1991-05.com.microsoft:stas
+set iscsi-target iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.dc5daf5a26d7
+set keep-san 1
+sanboot ${iscsi-target}
+boot || shell
