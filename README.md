@@ -34,7 +34,7 @@ initrd -n boot.wim boot.wim boot.wim
 boot
 ```
 
-- Boot from iSCSI:
+- Boot from iSCSI (Windows):
 
 ```
 #!ipxe
@@ -44,6 +44,19 @@ set gateway 0.0.0.0
 set initiator-iqn iqn.1991-05.com.microsoft:stas
 
 sanboot --keep --drive 0x80 iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.d907af099920
+boot
+```
+
+- Boot from iSCSI (Ubuntu):
+
+```
+#!ipxe
+
+dhcp
+set gateway 0.0.0.0
+set initiator-iqn iqn.1991-05.com.microsoft:stas
+
+sanboot --filename \EFI\ubuntu\shimx64.efi iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.c727f9503423
 boot
 ```
 

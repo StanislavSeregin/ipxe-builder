@@ -1,8 +1,27 @@
 #!ipxe
 
+menu iSCSI Boot Menu
+item entry1 Boot Windows
+item entry2 Boot Ubuntu
+item entry3 Boot WinPE
+choose os
+
 dhcp
 set gateway 0.0.0.0
 set initiator-iqn iqn.1991-05.com.microsoft:stas
 
+goto ${os}
+
+:entry1
 sanboot --keep --drive 0x80 iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.d907af099920
+
+:entry2
+sanboot --filename \EFI\ubuntu\shimx64.efi iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.c727f9503423
+
+:entry3
+sanhook --drive 0x80 iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.d907af099920
+kernel wimboot gui
+initrd -n bcd BCD bcd
+initrd -n boot.sdi boot.sdi boot.sdi
+initrd -n boot.wim boot.wim boot.wim
 boot
