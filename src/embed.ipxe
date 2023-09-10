@@ -3,8 +3,8 @@
 set win11-work iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.d907af099920
 set win11-home iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.19f9a5f0cc98
 set ubuntu iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.c727f9503423
-set win11-music-lab iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:bf7ff5fa7a70
-set win11-games iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:c711996ce07c
+set win11-music-lab iscsi:10.0.0.1:::0:iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.bf7ff5fa7a70
+set win11-games iscsi:10.0.0.1:::0:iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.c711996ce07c
 
 menu Boot Menu
 item --gap -- iSCSI targets:
