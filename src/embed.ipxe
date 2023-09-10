@@ -3,15 +3,19 @@
 set win11-work iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.d907af099920
 set win11-home iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.19f9a5f0cc98
 set ubuntu iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.c727f9503423
+set win11-music-lab iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:bf7ff5fa7a70
+set win11-games iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:c711996ce07c
 
 menu Boot Menu
 item --gap -- iSCSI targets:
 item entry1 Windows 11 (Work)
 item entry2 Windows 11 (Home safe)
 item entry3 Ubuntu (QEMU KVM)
+item entry4 Windows 11 (Music lab)
+item entry5 Windows 11 (Games)
 item --gap -- Utils:
-item entry4 WinPE 10
-item entry5 WinPE 11
+item entry10 WinPE 10
+item entry11 WinPE 11
 choose os
 
 dhcp
@@ -30,8 +34,14 @@ sanboot --keep --drive 0x80 ${win11-home}
 sanboot --filename \EFI\ubuntu\shimx64.efi ${ubuntu}
 
 :entry4
+sanboot --keep --drive 0x80 ${win11-music-lab}
+
+:entry5
+sanboot --keep --drive 0x80 ${win11-games}
+
+:entry10
 goto hook-menu
-:entry4_1
+:entry10_1
 kernel wimboot gui
 initrd -n bootx64.efi bootx64.efi bootx64.efi
 initrd -n bcd BCD bcd
@@ -39,9 +49,9 @@ initrd -n boot.sdi boot.sdi boot.sdi
 initrd -n boot.wim strelec10x64.wim boot.wim
 boot
 
-:entry5
+:entry11
 goto hook-menu
-:entry5_1
+:entry11_1
 kernel wimboot gui
 initrd -n bootx64.efi bootx64.efi bootx64.efi
 initrd -n bcd BCD bcd
@@ -54,6 +64,8 @@ menu Hook iSCSI
 item hook0 Nothing
 item hook1 Windows 11 (Work)
 item hook2 Windows 11 (Home safe)
+item hook3 Windows 11 (Music lab)
+item hook4 Windows 11 (Games)
 choose hook-entry
 goto ${hook-entry}
 
@@ -66,4 +78,12 @@ goto ${os}_1
 
 :hook2
 sanhook --drive 0x80 ${win11-home}
+goto ${os}_1
+
+:hook3
+sanhook --drive 0x80 ${win11-music-lab}
+goto ${os}_1
+
+:hook4
+sanhook --drive 0x80 ${win11-games}
 goto ${os}_1
