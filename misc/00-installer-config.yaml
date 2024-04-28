@@ -1,0 +1,17 @@
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp13s0:
+      dhcp4: true
+      match:
+        macaddress: 22:02:4d:06:9a:2f
+      set-name: enp13s0
+    enp9s0:
+      dhcp4: true
+      addresses:
+        - 10.0.0.1/24
+      mtu: 9000
+      match:
+        macaddress: 24:8a:07:78:02:a0
+      set-name: enp9s0
+  version: 2
