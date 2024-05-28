@@ -8,8 +8,6 @@ RUN git clone https://github.com/ipxe/ipxe.git
 
 FROM sources AS build
 WORKDIR /ipxe/src
-COPY src/embed.ipxe .
-COPY src/pic.png .
 
 # Enable CONSOLE_CMD, IMAGE_PNG
 RUN mv ./config/general.h ./config/general.h.back
@@ -21,6 +19,10 @@ RUN cat ./config/general.h.back >> ./config/general.h
 RUN mv ./config/console.h ./config/console.h.back
 RUN echo "#define CONSOLE_FRAMEBUFFER\n" > ./config/console.h
 RUN cat ./config/console.h.back >> ./config/console.h
+
+# Copy assets
+COPY src/embed.ipxe .
+COPY src/pic.png .
 
 RUN make bin-x86_64-efi/ipxe.usb EMBED=embed.ipxe,pic.png -j8
 

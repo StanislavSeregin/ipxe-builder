@@ -1,6 +1,5 @@
 #!ipxe
 
-console --x 1920 --y 1280
 console --picture pic.png
 
 set win11-work iscsi:10.0.0.1::::iqn.2003-01.org.linux-iscsi.stas-server.x8664:sn.d907af099920
